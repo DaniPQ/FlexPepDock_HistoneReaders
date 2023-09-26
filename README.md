@@ -7,8 +7,19 @@ This pipeline is specifically designed to study the intricate interactions betwe
 Relaxation of the initial structures.
 Identification of interacting pairs based on an experimental native structure.
 Execution of FlexPepDock for precise peptide docking.
+
 **Prerequisites**
-[List any software, libraries or dependencies needed]
+1. Rosetta Installation
+This pipeline requires Rosetta to be installed. The installation process will vary depending on your operating system. As mentioned, this pipeline is optimized for a Linux server named "farm". You can follow the official Rosetta installation instructions tailored to your OS.
+
+2. Required Scripts
+In addition to Rosetta, the following scripts need to be installed locally:
+
+excs.sh
+extract-pdbs.sh
+extract-pdbs-tag.sh
+fam3RT-sameFolder.sh
+merge_silent.pl
 
 **Installation**
 [Provide steps on how to install or setup the pipeline]
