@@ -23,6 +23,14 @@ extract-pdbs.sh
 extract-pdbs-tag.sh
 fam3RT-sameFolder.sh
 merge_silent.pl
+cull_silent.pl
+findColumn.pl
+
+5. Alphafold2/PeptidesPDBs
+Start with the prediction of the peptides you wil dock. In this case we are only modelling the reader domains because the partners will always be the histones. In the Input_PDBs folder are the histone peptides and the Experimental crystal structures I use. I generate >=5 models in alphafold for each reader domain, I make sure the rmsd between them and the experimental structure is <1A and that the prediction of the structures is consistent (rmsd<1). For the rest of the prediction I will only use one AF2 model.
+
+! It is important to use a sequence of the same length than the native experimental structure you will compare it to
+! The Histone peptides are relaxed already.
 
 **Installation**
 [Provide steps on how to install or setup the pipeline]
