@@ -36,11 +36,43 @@ findColumn.pl
 !!! It's important to use a sequence of the same length as the native experimental structure to which you'll compare it.
 !!! The histone peptides have already been relaxed.
 
-**Usage**
+1. **Usage**
 
-less 
+   1. **Relaxation**
 
-**License**
-[Provide information about the licensing]
+      The relaxation process is an initial optimization step that refines the structure by alleviating steric clashes and adjusting atomic positions to minimize the energy of the system. In this pipeline, we'll start with the `ReaderPeptide.pdb` file, which originates from one of the models generated using Alphafold2. To perform this relaxation, use the `simple-FastRelax.sh` script.
+
+      In the desired directory on Farm upload your `ReaderPeptide.pdb`, upload this simple-FastRelax.sh script and the B_FastRelax.xml. Give the corresponding permissions to simple-FastRelax.sh.
+
+   Relaxation_Dir : 
+
+   a.  `ReaderPeptide.pdb`
+
+   b. simple-FastRelax.sh
+
+   c. B_Fast_Relax.xml
+
+```bash
+mkdir outfiles
+sbatch simple-FastRelax.sh ReaderPeptide.pdb 1
+```
+
+'Fast-Relax-ReaderPeptide-1.silent ..... Fast-Relax-ReaderPeptide-500.silent'
+
+This will produce 500 models of the relaxed structure in several silent files. First, using the merge_silent.py locally installed commands, I will generate a single silent file and then remove the rest of the files generated.
+
+```bash
+cd outfiles
+fam3RT-samefolder.sh
+```
+
+'outfiles_ReaderPeptideSILENT.out' and 'outfiles_ReaderPeptideSCORE.fsc'
+
+With the exec.sh locally installed script, I sort and filter the silent file generated so it will retrieve a silent file with the 10 best scored models
+
+```bash
+exsc.sh outfiles_ReaderPeptideSILENT.out score 10
+```
+
 
 
