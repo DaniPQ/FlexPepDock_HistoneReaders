@@ -7,6 +7,8 @@ This pipeline is specifically designed to study the intricate interactions betwe
 Relaxation of the initial structures.
 Identification of interacting pairs based on an experimental native structure.
 Execution of FlexPepDock for precise peptide docking.
+Analyze the interaction affinities based on the Average distance of the N terminal of the interacting AA with the aromatic cage of the reader domain
+
 
 **Prerequisites**
 1. Rosetta Installation
@@ -27,16 +29,15 @@ cull_silent.pl
 findColumn.pl
 
 5. Alphafold2/PeptidesPDBs
-Start with the prediction of the peptides you wil dock. In this case we are only modelling the reader domains because the partners will always be the histones. In the Input_PDBs folder are the histone peptides and the Experimental crystal structures I use. I generate >=5 models in alphafold for each reader domain, I make sure the rmsd between them and the experimental structure is <1A and that the prediction of the structures is consistent (rmsd<1). For the rest of the prediction I will only use one AF2 model.
+Start with the prediction of the peptides you will dock. In this case, we are only modeling the reader domains because the partners will always be the histones. The Input_PDBs folder contains the histone peptides and the experimental crystal structures I use. I generate 5 or more models in AlphaFold for each reader domain, ensuring the RMSD between them and the experimental structure is less than 1Å, and that the prediction of the structures is consistent (RMSD < 1Å). For the rest of the predictions, I will use only one AF2 model.
 
-! It is important to use a sequence of the same length than the native experimental structure you will compare it to
-! The Histone peptides are relaxed already.
+!!! It's important to use a sequence of the same length as the native experimental structure to which you'll compare it.
+!!! The histone peptides have already been relaxed.
 
-**Installation**
-[Provide steps on how to install or setup the pipeline]
 
 **Usage**
-[Step-by-step guide on how to use the pipeline]
+
+
 
 **License**
 [Provide information about the licensing]
