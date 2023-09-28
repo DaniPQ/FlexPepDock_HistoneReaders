@@ -1,4 +1,11 @@
-#!/bin/bash 
+#!/bin/bash
+#$ -S /bin/bash
+
+#SBATCH --array=1-500
+#SBATCH --job-name=fast-relax
+#SBATCH --time=0-10
+#SBATCH --partition=bmm
+#SBATCH --mail-type=ALL
 
 if [ $# -lt 2 ]; then
     echo "USAGE: simple-FastRelax.sh <input> <nstruct>"
@@ -7,18 +14,19 @@ fi
 pdb=$1
 nstruct=$2
 
-~/Applications/rosetta.binary.mac.release-356/main/source/bin/rosetta_scripts.static.macosclangrelease \
--in:path:database ~/Applications/rosetta.binary.mac.release-356/main/database \
+/home/dpquiroz/Applications/rosetta_bin_linux_2021.16.61629_bundle/main/source/bin/rosetta_scripts.static.linuxgccrelease \
+-in:path:database /home/dpquiroz/Applications/rosetta_bin_linux_2021.16.61629_bundle/main/database \
 -in:file:s ./$pdb \
 -in:file:native ./$pdb \
 -parser:protocol ./B_FastRelax.xml \
 -relax:constrain_relax_to_start_coords \
 -ignore_unrecognized_res \
 -nstruct $nstruct \
--default_max_cycles 2 \
+-default_max_cycles 200 \
 -out:prefix Fast-Relaxed- \
--out:file:silent ./Fast-Relax-$pdb.silent \
+-out:file:silent Fast-Relax_${SLURM_ARRAY_TASK_ID}.silent \
 -out:file:silent_struct_type binary \
--out:file:scorefile ./Fast-Relax-$pdb.sc \
-
-#in bash : "simple-FastRelax.sh ../1.Modeling/AF-MSH6-Tudor.pdb 1 > rosetta_run.log 2>&1"
+-out:output true \
+-out:path:all outfiles \
+-out:file:fullatom \
+-out:file:scorefile Fast-Relax.sc
